@@ -21,15 +21,37 @@
         define('PRICE_PER_SCOOP', 2.50);
         define('SALES_TAX_RATE', 0.11);
 
-
+        //For testing
         echo "<pre";
         var_dump($_POST);
         echo "</pre>";
 
-        $scoops = $_POST['scoops'];
-        $flavors = $_POST['flavor'];
+        //get data from post array
+        if (!empty($_POST['scoops'])){
+            $scoops = $_POST['scoops'];
+        }
+        else{
+            echo "<p> Enter scoops!</p>";
+            return;
+        }
+        //dont think this is right
+        if (!isset($_POST['flavor'])){
+            $flavors = $_POST['flavor'];
+
+        }
+        else{
+            echo "<p>Please select at least one flavor</p>";
+            return;
+        }
+
+        if (!isset($_POST['cone'])){
+            $cone = $_POST['cone'];
+        }
+        else{
+            echo "<p>Please select a cone or cup</p>";
+            return;
+        }
         $flavorString = implode(",", $flavors);
-        $cone = $_POST['cone'];
 
         //Calculate total due
         $subtotal = PRICE_PER_SCOOP * $scoops;
